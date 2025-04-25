@@ -88,7 +88,7 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html"):
     <script type="text/javascript">
     window.addEventListener("load", function () {{
         const rootNodeId = "{sitemap_url}";
-        const titleNodeId = "graph_title";
+        const titleNodeId = "graph_title";  // Add this line
         const originalLabels = {{}};
 
         network.on("click", function (params) {{
@@ -101,19 +101,21 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html"):
             }}
 
             if (node.id === rootNodeId || node.id === titleNodeId) {{
+                // Skip root node and title node
                 return;
             }}
 
             if (node.id === clickedNodeId) {{
                 nodes.update({{id: node.id, label: node.title}});
             }} else {{
-                nodes.update({{id: node.id, label: \"\"}});
+                nodes.update({{id: node.id, label: ""}});
             }}
             }});
         }} else {{
+            // Clicked background: reset all except root and title
             nodes.get().forEach(function (node) {{
-            if (node.id !== rootNodeId && node.id !== titleNodeId && originalLabels[node.id] === \"\") {{
-                nodes.update({{id: node.id, label: \"\"}});
+            if (node.id !== rootNodeId && node.id !== titleNodeId && originalLabels[node.id] === "") {{
+                nodes.update({{id: node.id, label: ""}});
             }}
             }});
         }}
