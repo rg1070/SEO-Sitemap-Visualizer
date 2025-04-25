@@ -13,7 +13,7 @@ This project is a web-based tool that allows you to **enter a website domain** (
 ## 📸 Demo
 
 Visit the live app here:  
-👉 **[https://your-app-name.onrender.com](https://your-app-name.onrender.com)**
+👉 **[https://seo-sitemap-visualizer.onrender.com/](https://seo-sitemap-visualizer.onrender.com/)**
 
 > Example: Try `www.northlightai.com`
 
@@ -31,7 +31,7 @@ Visit the live app here:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/sitemap-visualizer.git
+git clone https://github.com/rg1070/SEO-Sitemap-Visualizer.git
 cd sitemap-visualizer
 ```
 
