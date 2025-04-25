@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from backend.sitemap_parser import generate_graph
 from urllib.parse import urlparse
 
@@ -27,7 +27,9 @@ def home():
 
 @app.route('/graph')
 def graph():
-    return open("sitemap_network.html", "r").read()
+    with open("sitemap_network.html", "r", encoding="utf-8") as f:
+        html_content = f.read()
+    return Response(html_content, mimetype='text/html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
