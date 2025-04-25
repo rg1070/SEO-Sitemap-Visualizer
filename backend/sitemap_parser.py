@@ -78,4 +78,55 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html"):
     { "physics": { "stabilization": false }, "interaction": { "dragNodes": true } }
     """)
     net.write_html(output_file)
+
+    # Read the generated HTML
+    with open(output_file, "r", encoding="utf-8") as f:
+        html = f.read()
+
+    # Inject JS
+    inject_js = f"""
+    <script type="text/javascript">
+    window.addEventListener("load", function () {{
+        const rootNodeId = "{sitemap_url}";
+        const titleNodeId = "graph_title";
+        const originalLabels = {{}};
+
+        network.on("click", function (params) {{
+        if (params.nodes.length > 0) {{
+            let clickedNodeId = params.nodes[0];
+
+            nodes.get().forEach(function (node) {{
+            if (!(node.id in originalLabels)) {{
+                originalLabels[node.id] = node.label;
+            }}
+
+            if (node.id === rootNodeId || node.id === titleNodeId) {{
+                return;
+            }}
+
+            if (node.id === clickedNodeId) {{
+                nodes.update({{id: node.id, label: node.title}});
+            }} else {{
+                nodes.update({{id: node.id, label: \"\"}});
+            }}
+            }});
+        }} else {{
+            nodes.get().forEach(function (node) {{
+            if (node.id !== rootNodeId && node.id !== titleNodeId && originalLabels[node.id] === \"\") {{
+                nodes.update({{id: node.id, label: \"\"}});
+            }}
+            }});
+        }}
+        }});
+    }});
+    </script>
+    """
+
+    # Inject before </body>
+    html = html.replace("</body>", inject_js + "\\n</body>")
+
+    # Save it back
+    with open(output_file, "w", encoding="utf-8") as f:
+        f.write(html)
+
     return output_file

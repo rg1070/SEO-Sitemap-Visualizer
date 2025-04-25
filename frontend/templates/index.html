@@ -3,17 +3,24 @@
 
 <head>
     <title>Sitemap Visualizer</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <div class="container">
         <h1>🌐 Sitemap Visualizer</h1>
-        <p>Enter a domain like <code>www.example.com</code> to see its sitemap.</p>
+        <p>Enter a domain like <code>www.example.com</code> and visualize its sitemap.</p>
         <form method="POST">
             <input type="text" name="url_input" placeholder="www.example.com" required>
             <button type="submit">Visualize</button>
         </form>
+
+        {% if graph_file %}
+        <div class="graph-container">
+            <iframe src="{{ url_for('graph') }}" width="100%" height="750px"
+                style="border:none; margin-top: 30px;"></iframe>
+        </div>
+        {% endif %}
     </div>
 </body>
 
