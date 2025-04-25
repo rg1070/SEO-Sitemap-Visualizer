@@ -2,7 +2,12 @@ from flask import Flask, render_template, request
 from backend.sitemap_parser import generate_graph
 from urllib.parse import urlparse
 
-app = Flask(__name__)
+# ✅ Tell Flask where to find templates and static files
+app = Flask(
+    __name__,
+    template_folder="../frontend/templates",
+    static_folder="../frontend/static"
+)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -16,7 +21,7 @@ def home():
         parsed_url = urlparse(raw_url)
         if parsed_url.scheme and parsed_url.netloc:
             output_file = generate_graph(raw_url)
-            return render_template("result.html", graph_file=output_file)
+            return render_template("results.html", graph_file=output_file)
 
     return render_template("index.html")
 
