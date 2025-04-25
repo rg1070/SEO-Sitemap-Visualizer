@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: sitemap-visualizer
+    env: docker
+    plan: free
+    region: oregon
