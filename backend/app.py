@@ -12,6 +12,9 @@ app = Flask(
 @app.route('/', methods=['GET', 'POST'])
 def home():
     graph_file = None
+    json_available = False
+    domain_name = None  # ✅ Always define upfront
+
     if request.method == 'POST':
         raw_url = request.form['url_input'].strip()
         if not raw_url.startswith("http"):
@@ -23,8 +26,11 @@ def home():
         if parsed_url.scheme and parsed_url.netloc:
             generate_graph(raw_url)
             graph_file = "sitemap_network.html"
-    domain_name = parsed_url.netloc.replace(".", "_")
+            json_available = True
+            domain_name = parsed_url.netloc.replace(".", "_")  # ✅ Only if defined
+
     return render_template("index.html", graph_file=graph_file, json_available=json_available, domain_name=domain_name)
+
 
 @app.route('/graph')
 def graph():
