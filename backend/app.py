@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Response
 from backend.sitemap_parser import generate_graph
 from urllib.parse import urlparse
+import os
 
 # ✅ Tell Flask where to find templates and static files
 app = Flask(
@@ -42,8 +43,9 @@ def graph():
 def download_json():
     from flask import request, send_file
     domain = request.args.get("filename", "sitemap_tree")
-    filepath = f"sitemap_{domain}.json"
-    return send_file(filepath, as_attachment=True, download_name=filepath)
+    filepath = os.path.join(os.getcwd(), f"sitemap_{domain}.json")
+    return send_file(filepath, as_attachment=True, download_name=f"sitemap_{domain}.json")
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
