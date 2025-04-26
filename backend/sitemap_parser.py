@@ -4,6 +4,7 @@ import requests
 from urllib.parse import urlparse
 import networkx as nx
 from pyvis.network import Network
+import json
 
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
@@ -53,6 +54,10 @@ def tree_to_edges(tree, parent=None):
 
 def generate_graph(sitemap_url, output_file="sitemap_network.html"):
     tree = {sitemap_url: parse_sitemap(sitemap_url)}
+    
+    with open("sitemap_tree.json", "w", encoding="utf-8") as f:
+        json.dump(tree, f, indent=2)
+
     edges = tree_to_edges(tree[sitemap_url], parent=sitemap_url)
 
     G = nx.DiGraph()
