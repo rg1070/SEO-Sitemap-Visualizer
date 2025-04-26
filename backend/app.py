@@ -23,8 +23,8 @@ def home():
         if parsed_url.scheme and parsed_url.netloc:
             generate_graph(raw_url)
             graph_file = "sitemap_network.html"
-
-    return render_template("index.html", graph_file=graph_file)
+    domain_name = parsed_url.netloc.replace(".", "_")
+    return render_template("index.html", graph_file=graph_file, json_available=json_available, domain_name=domain_name)
 
 @app.route('/graph')
 def graph():

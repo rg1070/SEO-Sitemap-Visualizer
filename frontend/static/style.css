@@ -31,3 +31,25 @@ button {
     border-radius: 6px;
     cursor: pointer;
 }
+
+.json-download {
+    margin-top: 30px;
+}
+
+.download-btn {
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.download-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
