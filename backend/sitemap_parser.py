@@ -52,10 +52,14 @@ def tree_to_edges(tree, parent=None):
             edges += tree_to_edges(value, parent=key)
     return edges
 
-def generate_graph(sitemap_url, output_file="sitemap_network.html"):
+def generate_graph(sitemap_url, output_file="sitemap_network.html", json_filename=None):
     tree = {sitemap_url: parse_sitemap(sitemap_url)}
-    
-    with open("sitemap_tree.json", "w", encoding="utf-8") as f:
+
+    # Default name if not provided
+    if json_filename is None:
+        json_filename = "sitemap_tree.json"
+
+    with open(json_filename, "w", encoding="utf-8") as f:
         json.dump(tree, f, indent=2)
 
     edges = tree_to_edges(tree[sitemap_url], parent=sitemap_url)
