@@ -38,5 +38,11 @@ def graph():
         html_content = f.read()
     return Response(html_content, mimetype='text/html')
 
+@app.route('/download-json')
+def download_json():
+    from flask import request, send_file
+    filename = request.args.get("filename", "sitemap_tree")
+    return send_file("sitemap_tree.json", as_attachment=True, download_name=f"{filename}.json")
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
