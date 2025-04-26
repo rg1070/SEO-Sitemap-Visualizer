@@ -16,7 +16,7 @@
         </form>
         {% if json_available %}
         <div class="json-download">
-            <a href="{{ url_for('download_json') }}?filename={{ domain_name }}" download>
+            <a href="{{ url_for('download_json') }}?filename={{ domain_name }}">
                 <button class="download-btn">
                     📥 Download Sitemap Tree (JSON)
                 </button>

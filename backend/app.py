@@ -24,12 +24,11 @@ def home():
 
         parsed_url = urlparse(raw_url)
         if parsed_url.scheme and parsed_url.netloc:
-            domain_name = parsed_url.netloc.replace(".", "_")
+            domain_name = parsed_url.hostname.replace(".", "_")
             json_filename = f"sitemap_{domain_name}.json"
             generate_graph(raw_url, json_filename=json_filename)
             graph_file = "sitemap_network.html"
             json_available = True
-            domain_name = parsed_url.netloc.replace(".", "_")  # ✅ Only if defined
 
     return render_template("index.html", graph_file=graph_file, json_available=json_available, domain_name=domain_name)
 
@@ -44,7 +43,7 @@ def download_json():
     from flask import request, send_file
     domain = request.args.get("filename", "sitemap_tree")
     filepath = f"sitemap_{domain}.json"
-    return send_file(filepath, as_attachment=True, download_name=f"{filepath}")
+    return send_file(filepath, as_attachment=True, download_name=filepath)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
