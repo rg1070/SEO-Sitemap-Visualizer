@@ -96,8 +96,12 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html", json_filenam
     inject_js = f"""
     <script type="text/javascript">
     window.addEventListener("load", function () {{
+        // ✅ Hide the Pyvis loading bar if it exists
+        const loader = document.getElementById("loadingBar");
+        if (loader) loader.style.display = "none";
+
         const rootNodeId = "{sitemap_url}";
-        const titleNodeId = "graph_title";  // Add this line
+        const titleNodeId = "graph_title";
         const originalLabels = {{}};
 
         network.on("click", function (params) {{
@@ -110,7 +114,6 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html", json_filenam
             }}
 
             if (node.id === rootNodeId || node.id === titleNodeId) {{
-                // Skip root node and title node
                 return;
             }}
 
@@ -121,7 +124,6 @@ def generate_graph(sitemap_url, output_file="sitemap_network.html", json_filenam
             }}
             }});
         }} else {{
-            // Clicked background: reset all except root and title
             nodes.get().forEach(function (node) {{
             if (node.id !== rootNodeId && node.id !== titleNodeId && originalLabels[node.id] === "") {{
                 nodes.update({{id: node.id, label: ""}});
