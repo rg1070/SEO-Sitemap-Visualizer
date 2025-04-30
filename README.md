@@ -1,23 +1,23 @@
-# 🌐 Sitemap Visualizer
+# Sitemap Visualizer
 
 This project is a web-based tool that allows you to **enter a website domain** (e.g., `www.example.com`) and generate a **visual representation of its sitemap**. It crawls sitemap XML files recursively and builds an interactive network graph of all linked pages using Python, Flask, and PyVis.
 
-## ✨ Features
+## Features
 
-- 🌍 Input any domain and crawl its `sitemap.xml`
-- 🔁 Recursively parses nested sitemap indexes
-- 🧠 Visualizes the structure as an interactive graph
-- ⚡ Clean UI built with Flask and HTML/CSS
-- 🚀 Deployed on [Render](https://render.com)
+- Input any domain and crawl its `sitemap.xml`
+- Recursively parses nested sitemap indexes
+- Visualizes the structure as an interactive graph
+- Clean UI built with Flask and HTML/CSS
+- Deployed on [Render](https://render.com)
 
-## 📸 Demo
+## Demo
 
 Visit the live app here:  
-👉 **[https://seo-sitemap-visualizer.onrender.com/](https://seo-sitemap-visualizer.onrender.com/)**
+**[https://seo-sitemap-visualizer.onrender.com/](https://seo-sitemap-visualizer.onrender.com/)**
 
 > Example: Try `www.northlightai.com`
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Python 3.10
 - Flask
@@ -26,7 +26,7 @@ Visit the live app here:
 - Docker (for deployment)
 - Hosted on Render
 
-## 🧑‍💻 Run Locally
+## Run Locally
 
 ### 1. Clone the Repository
 
@@ -56,7 +56,7 @@ python backend/app.py
 
 Then open `http://localhost:5000` in your browser.
 
-## 🐳 Docker Instructions
+## Docker Instructions
 
 ### Build the Image
 
@@ -70,7 +70,7 @@ docker build -t sitemap-visualizer .
 docker run -p 5000:5000 sitemap-visualizer
 ```
 
-## ☁️ Deploying on Render
+## Deploying on Render
 
 This project uses Render’s **Docker-based web service** with a `render.yaml` file.  
 To deploy:
@@ -80,10 +80,7 @@ To deploy:
 3. Create a new **Web Service**
 4. Select the repo and deploy
 
-## 🙏 Acknowledgment
+## Acknowledgment
 
 This project was created for educational and practical deployment experience, showcasing the use of web scraping, graph visualization, and Dockerized Flask apps in production.
 
-## 📄 License
-
-MIT License. Feel free to use and modify.
